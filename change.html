@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>翻动图片</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="Pre" v-show="this.count>0">上一张</button>
+        <img :src="imgSrc+'.png'" alt="" width="300px" height="500px" />
+        <button @click="Next" v-show="this.count<4">下一张</button>
+
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                count: 0,
+                imgSrc: "../imgUrl/img" + 0,
+                isPreShow: true,
+                isNextShow: true,
+
+            },
+            methods: {
+                Pre: function () {
+                    if (this.count > 0) {
+                        this.isPreShow = true;
+                        this.count -= 1;
+                        // console.log(this.count);
+                        this.imgSrc = "../imgUrl/img" + this.count;
+                    } else if (this.count < 0) {
+                        this.count = 3
+                    }
+
+                },
+                Next: function () {
+                    if (this.count < 3) {
+                        if (this.count > 3) {
+                            this.count = 0;
+                        }
+                        this.count += 1;
+                        // console.log(this.count);
+                        this.imgSrc = "./imgUrl/img" + this.count;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
